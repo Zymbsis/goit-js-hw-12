@@ -65,33 +65,36 @@ form.addEventListener('submit', async e => {
 async function onButtonClick(e) {
   loaderButton.classList.remove('is-visible');
   loaderText.classList.add('is-visible');
-  if (pixabayApi.searchImgParams.page > totalPageQuantity) {
-    loaderButton.removeEventListener('click', onButtonClick);
-    renderFn.createPopUp(
-      "We're sorry, but you've reached the end of search results.",
+  try {
+    imgCollection = (await pixabayApi.pixabayRequest()).hits;
+    renderFn.createMarkup(
+      imgCollection,
       loaderText,
-      input
+      viewGallery,
+      galleryContainer
     );
-  } else {
-    try {
-      imgCollection = (await pixabayApi.pixabayRequest()).hits;
-      renderFn.createMarkup(
-        imgCollection,
-        loaderText,
-        viewGallery,
-        galleryContainer
-      );
-      pixabayApi.searchImgParams.page += 1;
+    pixabayApi.searchImgParams.page += 1;
+    console.log(pixabayApi.searchImgParams.page);
+
+    if (pixabayApi.searchImgParams.page < totalPageQuantity) {
       loaderButton.classList.add('is-visible');
-      scrollWindowOnBtnClick();
-    } catch (error) {
+    } else {
+      loaderButton.removeEventListener('click', onButtonClick);
       renderFn.createPopUp(
-        'Oops! Something went wrong. Try again!',
+        "We're sorry, but you've reached the end of search results.",
         loaderText,
         input
       );
-      console.log(error);
     }
+
+    scrollWindowOnBtnClick();
+  } catch (error) {
+    renderFn.createPopUp(
+      'Oops! Something went wrong. Try again!',
+      loaderText,
+      input
+    );
+    console.log(error);
   }
 }
 
