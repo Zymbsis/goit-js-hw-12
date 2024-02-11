@@ -333,7 +333,7 @@ textarea {
   display: none;
   position: fixed;
   bottom: 32px;
-  left: 15px;
+  right: 50px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -347,23 +347,4 @@ textarea {
 
 .is-visible {
   display: block;
-}
-
-.button-up:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: rgba(108, 140, 255, 0.5);
-  transform-origin: 30px 30%;
-  animation: spin 1s infinite linear;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
 }
