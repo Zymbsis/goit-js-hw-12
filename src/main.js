@@ -8,7 +8,7 @@ const input = form.elements.text;
 const galleryContainer = document.querySelector('.gallery-container');
 const loaderText = document.querySelector('.loader');
 const loaderButton = document.querySelector('.loader-button');
-
+const buttonUp = document.querySelector('.button-up');
 let totalPageQuantity;
 let imgCollection;
 const viewGallery = new SimpleLightbox('.gallery-link');
@@ -74,8 +74,6 @@ async function onButtonClick(e) {
       galleryContainer
     );
     pixabayApi.searchImgParams.page += 1;
-    console.log(pixabayApi.searchImgParams.page);
-
     if (pixabayApi.searchImgParams.page < totalPageQuantity) {
       loaderButton.classList.add('is-visible');
     } else {
@@ -102,7 +100,18 @@ function scrollWindowOnBtnClick() {
   const elemHeight = document
     .querySelector('.gallery-item')
     .getBoundingClientRect().height;
-
   const valueForScrollWindow = Math.ceil(elemHeight * 2.5);
   window.scrollBy({ top: valueForScrollWindow, behavior: 'smooth' });
 }
+
+const observer = new IntersectionObserver(entries => {
+  if (entries[0].intersectionRatio === 0) {
+    buttonUp.classList.add('is-visible');
+  } else {
+    buttonUp.classList.remove('is-visible');
+  }
+});
+observer.observe(form);
+buttonUp.addEventListener('click', () =>
+  form.scrollIntoView({ behavior: 'smooth' })
+);

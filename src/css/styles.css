@@ -321,6 +321,27 @@ textarea {
 }
 
 .loader-button:hover {
+  background-color: x
+}
+
+.loader-wrapper {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.button-up {
+  display: none;
+  position: fixed;
+  bottom: 32px;
+  left: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #4E75FF;
+  color: #fff;
+}
+
+.button-up:hover {
   background-color: #6C8CFF;
 }
 
@@ -328,6 +349,21 @@ textarea {
   display: block;
 }
 
-.loader-wrapper {
-  margin-bottom: 32px;
+.button-up:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(108, 140, 255, 0.5);
+  transform-origin: 30px 30%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
