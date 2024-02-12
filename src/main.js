@@ -9,8 +9,10 @@ const galleryContainer = document.querySelector('.gallery-container');
 const loaderText = document.querySelector('.loader');
 const loaderButton = document.querySelector('.loader-button');
 const buttonUp = document.querySelector('.button-up');
+
 let totalPageQuantity;
 let imgCollection;
+
 const viewGallery = new SimpleLightbox('.gallery-link');
 
 form.addEventListener('submit', async e => {
@@ -28,6 +30,7 @@ form.addEventListener('submit', async e => {
     try {
       imgCollection = (await pixabayApi.pixabayRequest()).hits;
       const totalImgQuantity = (await pixabayApi.pixabayRequest()).totalHits;
+
       if (!imgCollection.length) {
         renderFn.createPopUp(
           'Sorry, there are no images matching your search query. Please, try again!',
@@ -44,6 +47,7 @@ form.addEventListener('submit', async e => {
           viewGallery,
           galleryContainer
         );
+
         if (totalPageQuantity > 1) {
           loaderButton.classList.add('is-visible');
           loaderButton.addEventListener('click', onButtonClick);
@@ -107,11 +111,15 @@ function scrollWindowOnBtnClick() {
 const observer = new IntersectionObserver(entries => {
   if (entries[0].intersectionRatio === 0) {
     buttonUp.classList.add('is-visible');
+    buttonUp.addEventListener('click', scrollOnClick);
   } else {
     buttonUp.classList.remove('is-visible');
+    buttonUp.removeEventListener('click', scrollOnClick);
   }
 });
+
 observer.observe(form);
-buttonUp.addEventListener('click', () =>
-  form.scrollIntoView({ behavior: 'smooth' })
-);
+
+function scrollOnClick() {
+  form.scrollIntoView({ behavior: 'smooth' });
+}
