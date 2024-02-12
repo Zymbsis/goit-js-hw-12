@@ -295,7 +295,7 @@ textarea {
   top: 50%;
   transform: translate(-50%, -50%);
   border: 2px solid rgba(78, 117, 255, 0.5);
-  background: #fff;
+  background: #d6d6d6;
   width: 40px;
   height: 40px;
   border-radius: 50%;
