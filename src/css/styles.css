@@ -3,6 +3,10 @@ body {
   background-color: #212121;
 }
 
+.body-light {
+  background-color: #e8e8e8;
+}
+
 h1,
 h2,
 h3,
@@ -50,15 +54,17 @@ textarea {
 }
 
 /* ================================================================================== */
+/* ================================================================================== */
 .container {
   max-width: 1158px;
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 auto;
+  position: relative;
 }
 
 .form {
-  padding-top: 36px;
+  padding-top: 50px;
   display: flex;
   justify-content: center;
   gap: 8px;
@@ -74,14 +80,16 @@ textarea {
   letter-spacing: 0.04em;
   color: #a1a1a1;
   border-radius: 5px;
-  border: solid #404c5d 1px;
+  border: 1px solid #404c5d;
   background: linear-gradient(145deg, #2e2d2d, #212121);
   box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
     inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
   transition: 500ms;
 }
 
-.form-input::placeholder {}
+.form-input::placeholder {
+  color: #a1a1a1
+}
 
 .form-input:hover {
   box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
@@ -91,7 +99,7 @@ textarea {
 
 .form-input:focus {
   box-shadow: 1px 1px 13px #545b78;
-  background: rgb(199, 199, 199);
+  background: #c7c7c7;
   color: #2e2d2d;
 }
 
@@ -101,7 +109,7 @@ textarea {
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  color: rgb(161, 161, 161);
+  color: #a1a1a1;
   border-radius: 5px;
   background: linear-gradient(145deg, #2e2d2d, #212121);
   box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
@@ -118,15 +126,15 @@ textarea {
 
 .loader {
   display: none;
+  position: relative;
   max-width: 380px;
   margin: 0 auto;
+  padding: 0 48px;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  text-align: center;
-  position: relative;
-  padding: 0 48px;
   color: #d6d6d6;
+  text-align: center;
 }
 
 .loader:before,
@@ -368,7 +376,7 @@ textarea {
   background: linear-gradient(145deg, #2e2d2d, #212121);
   box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
     inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
-  border: solid #404c5d 1px;
+  border: 1px solid #404c5d;
   transition: 500ms;
 }
 
@@ -380,4 +388,68 @@ textarea {
 
 .is-visible {
   display: block;
+}
+
+/* ************************************************************** */
+/* ************************************************************** */
+.toggle-switch {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 80px;
+  height: 36px;
+}
+
+.switch-label {
+  position: absolute;
+  width: 100%;
+  height: 36px;
+  background-color: #28292c;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+    inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+  border: 1px solid #404c5d;
+  transition: 500ms;
+}
+
+.switch-label:hover {
+  box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+  transition: 500ms;
+}
+
+.checkbox {
+  position: absolute;
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  transition: 300ms;
+}
+
+.checkbox:checked ~ .slider {
+  background-color: #d6d6d6;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #d6d6d6;
+  transition: 300ms;
+  box-shadow: none;
+}
+
+.checkbox:checked ~ .slider::before {
+  transform: translateX(30px);
+  background-color: #d6d6d6;
+  box-shadow: inset 12px -4px 0px 0px #28292c;
 }

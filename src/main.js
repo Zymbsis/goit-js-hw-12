@@ -123,3 +123,25 @@ observer.observe(form);
 function scrollOnClick() {
   form.scrollIntoView({ behavior: 'smooth' });
 }
+
+//TODO =======================================================================================================================
+//TODO =======================================================================================================================
+const localStorageKey = 'light-theme';
+const checkbox = document.querySelector('.checkbox');
+checkbox.addEventListener('change', () => {
+  localStorage.setItem(localStorageKey, JSON.stringify(checkbox.checked));
+  if (checkbox.checked) {
+    document.body.classList.add('body-light');
+  } else {
+    document.body.classList.remove('body-light');
+  }
+});
+
+window.addEventListener('load', () => {
+  checkbox.checked = JSON.parse(localStorage.getItem(localStorageKey));
+  if (checkbox.checked) {
+    document.body.classList.add('body-light');
+  } else {
+    document.body.classList.remove('body-light');
+  }
+});
