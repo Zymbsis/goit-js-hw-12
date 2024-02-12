@@ -1,5 +1,6 @@
 body {
   font-family: 'Montserrat', sans-serif;
+  background-color: #212121;
 }
 
 h1,
@@ -66,42 +67,53 @@ textarea {
 
 .form-input {
   width: 272px;
-  border: 1px solid #808080;
-  border-radius: 4px;
   padding: 8px 16px;
-  color: #2E2F42;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.form-input::placeholder {
-  color: #808080;
-}
-
-.form-input:hover {
-  border-color: #000;
-}
-
-.form-input:focus {
-  border-color: #4E75FF;
-}
-
-.form-button {
-  width: 91px;
-  border-radius: 4px;
-  background-color: #4E75FF;
-  color: #FFF;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: #a1a1a1;
+  border-radius: 5px;
+  border: solid #404c5d 1px;
+  background: linear-gradient(145deg, #2e2d2d, #212121);
+  box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+    inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+  transition: 500ms;
+}
+
+.form-input::placeholder {}
+
+.form-input:hover {
+  box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+  color: #212121;
+  transition: 500ms;
+}
+
+.form-input:focus {
+  box-shadow: 1px 1px 13px #545b78;
+  background: rgb(199, 199, 199);
+  color: #2e2d2d;
+}
+
+.form-button {
+  width: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: rgb(161, 161, 161);
+  border-radius: 5px;
+  background: linear-gradient(145deg, #2e2d2d, #212121);
+  box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+    inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+  border: solid #404c5d 1px;
+  transition: 500ms;
 }
 
 .form-button:hover {
-  background-color: #6C8CFF;
+  box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+  color: #d6d6d6;
+  transition: 500ms;
 }
 
 .loader {
@@ -114,7 +126,7 @@ textarea {
   text-align: center;
   position: relative;
   padding: 0 48px;
-  color: #2E2F42;
+  color: #d6d6d6;
 }
 
 .loader:before,
@@ -169,13 +181,17 @@ textarea {
   justify-content: space-between;
   width: 360px;
   border: 1px solid #808080;
-  border-radius: 4px;
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1)
+  border-radius: 5px;
+  box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+    inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+  border: solid #404c5d 1px;
+  transition: 500ms;
 }
 
 .gallery-item:hover {
   transform: scale(1.1);
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+  transition: 500ms;
 }
 
 .gallery-link {
@@ -203,6 +219,7 @@ textarea {
 
 .desc-text h3 {
   text-align: center;
+  color: #d6d6d6;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.33;
@@ -211,6 +228,7 @@ textarea {
 
 .desc-text p {
   text-align: center;
+  color: #d6d6d6;
   font-size: 12px;
   font-weight: 400;
   line-height: 2;
@@ -310,18 +328,23 @@ textarea {
   display: none;
   margin: 0 auto;
   padding: 8px 16px;
-  background-color: #4E75FF;
-  border-radius: 8px;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  color: #FFFFFF;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: rgb(161, 161, 161);
+  border-radius: 5px;
+  background: linear-gradient(145deg, #2e2d2d, #212121);
+  box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+    inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+  border: solid #404c5d 1px;
+  transition: 500ms;
 }
 
 .loader-button:hover {
-  background-color: #6C8CFF;
+  box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+  color: #d6d6d6;
+  transition: 500ms;
 }
 
 .loader-wrapper {
@@ -337,17 +360,22 @@ textarea {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #4E75FF;
-  color: #FFF;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: rgb(161, 161, 161);
+  background: linear-gradient(145deg, #2e2d2d, #212121);
+  box-shadow: -1px -5px 15px #41465b, 5px 5px 15px #41465b,
+    inset 5px 5px 10px #212121, inset -5px -5px 10px #212121;
+  border: solid #404c5d 1px;
+  transition: 500ms;
 }
 
 .button-up:hover {
-  background-color: #6C8CFF;
+  box-shadow: 1px 1px 13px #20232e, -1px -1px 13px #545b78;
+  color: #d6d6d6;
+  transition: 500ms;
 }
 
 .is-visible {
