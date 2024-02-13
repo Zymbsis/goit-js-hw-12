@@ -380,7 +380,7 @@ textarea {
 }
 
 .checkbox:checked ~ .slider {
-  background: linear-gradient(145deg, #d6d6d6, #e8e8e8);
+  background: linear-gradient(145deg, #fff, #e8e8e8);
 }
 
 .slider::before {
@@ -398,18 +398,19 @@ textarea {
 
 .checkbox:checked ~ .slider::before {
   transform: translateX(30px);
-  background: linear-gradient(145deg, #d6d6d6, #e8e8e8);
+  background: linear-gradient(145deg, #fff, #e8e8e8);
   box-shadow: inset 12px -4px 0px 0px #28292c;
 }
 
 .light-theme {
   color: #2e2d2d;
-  background: linear-gradient(145deg, #e8e8e8, #d6d6d6);
-  border: 1px solid #fff;
-  box-shadow: rgba(0, 0, 0, 1) 0px 25px 20px -20px;
+  background: linear-gradient(145deg, #fff, #e8e8e8);
+  border: 1px solid #e8e8e8;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 }
 
 .light-theme:hover {
+  background: linear-gradient(145deg, #d6d6d6, #e8e8e8);
   color: #212121;
   border: 1px solid #fff;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
