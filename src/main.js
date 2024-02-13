@@ -5,6 +5,7 @@ import * as renderFn from './js/render-functions';
 
 const form = document.querySelector('.form');
 const input = form.elements.text;
+
 const galleryContainer = document.querySelector('.gallery-container');
 const loaderText = document.querySelector('.loader');
 const loaderButton = document.querySelector('.loader-button');
@@ -12,7 +13,7 @@ const buttonUp = document.querySelector('.button-up');
 
 let totalPageQuantity;
 let imgCollection;
-
+let stateCheckbox;
 const viewGallery = new SimpleLightbox('.gallery-link');
 
 form.addEventListener('submit', async e => {
@@ -45,7 +46,8 @@ form.addEventListener('submit', async e => {
           imgCollection,
           loaderText,
           viewGallery,
-          galleryContainer
+          galleryContainer,
+          JSON.parse(localStorage.getItem(localStorageKey))
         );
 
         if (totalPageQuantity > 1) {
@@ -75,7 +77,8 @@ async function onButtonClick(e) {
       imgCollection,
       loaderText,
       viewGallery,
-      galleryContainer
+      galleryContainer,
+      JSON.parse(localStorage.getItem(localStorageKey))
     );
     pixabayApi.searchImgParams.page += 1;
     if (pixabayApi.searchImgParams.page < totalPageQuantity) {
@@ -128,20 +131,39 @@ function scrollOnClick() {
 //TODO =======================================================================================================================
 const localStorageKey = 'light-theme';
 const checkbox = document.querySelector('.checkbox');
+
 checkbox.addEventListener('change', () => {
   localStorage.setItem(localStorageKey, JSON.stringify(checkbox.checked));
+  const elemForChangeTheme = document.querySelectorAll('.dark-theme');
   if (checkbox.checked) {
     document.body.classList.add('body-light');
+    elemForChangeTheme.forEach(item => item.classList.add('light-theme'));
+    document
+      .querySelectorAll('.gallery-item')
+      .forEach(item => item.classList.add('light-theme'));
   } else {
     document.body.classList.remove('body-light');
+    elemForChangeTheme.forEach(item => item.classList.remove('light-theme'));
+    document
+      .querySelectorAll('.gallery-item')
+      .forEach(item => item.classList.remove('light-theme'));
   }
 });
 
 window.addEventListener('load', () => {
   checkbox.checked = JSON.parse(localStorage.getItem(localStorageKey));
+  const elemForChangeTheme = document.querySelectorAll('.dark-theme');
   if (checkbox.checked) {
     document.body.classList.add('body-light');
+    elemForChangeTheme.forEach(item => item.classList.add('light-theme'));
+    document
+      .querySelectorAll('.gallery-item')
+      .forEach(item => item.classList.add('light-theme'));
   } else {
     document.body.classList.remove('body-light');
+    elemForChangeTheme.forEach(item => item.classList.remove('light-theme'));
+    document
+      .querySelectorAll('.gallery-item')
+      .forEach(item => item.classList.remove('light-theme'));
   }
 });

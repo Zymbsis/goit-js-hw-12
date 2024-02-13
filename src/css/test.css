@@ -1,0 +1,9 @@
+.light-theme {
+  color: #2e2d2d;
+  background: linear-gradient(145deg, #d6d6d6, #a1a1a1);
+  box-shadow: none;
+}
+
+.light-theme:hover {
+  color: #212121;
+}
