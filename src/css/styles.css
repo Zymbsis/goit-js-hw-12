@@ -353,7 +353,7 @@ textarea {
 /* ************************************************************** */
 .toggle-switch {
   position: absolute;
-  top: 5px;
+  top: 4.5px;
   right: 5px;
   width: 80px;
   height: 36px;
