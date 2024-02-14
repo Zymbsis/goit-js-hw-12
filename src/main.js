@@ -169,6 +169,7 @@ function changeTheme() {
   }
 }
 function themeAtLoading() {
+  document.body.classList.add('body-visible');
   checkbox.checked = JSON.parse(localStorage.getItem(localStorageKey));
   if (checkbox.checked) {
     document.body.classList.add('body-light-theme');

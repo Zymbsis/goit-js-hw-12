@@ -1,6 +1,12 @@
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #212121;
+  opacity: 0;
+  transition: opacity 3000ms ease-in-out;
+}
+
+.body-visible {
+  opacity: 1;
 }
 
 h1,
@@ -420,6 +426,7 @@ textarea {
 .light-theme:active,
 .light-theme:focus {
   background: #e8e8e8;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }
 
 .img-loader-light-theme:after {
