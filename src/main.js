@@ -29,6 +29,7 @@ const viewGallery = new SimpleLightbox('.gallery-link');
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
+  loaderButton.classList.remove('is-visible');
   loaderButton.removeEventListener('click', onButtonClick);
   if (checkbox.checked) {
     textLoader.classList.add('text-loader-light-theme', 'is-visible');
