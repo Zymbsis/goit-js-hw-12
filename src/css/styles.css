@@ -353,7 +353,7 @@ textarea {
 /* ************************************************************** */
 .toggle-switch {
   position: absolute;
-  top: 4.5px;
+  top: 5px;
   right: 5px;
   width: 80px;
   height: 36px;
@@ -387,7 +387,7 @@ textarea {
 .slider::before {
   content: "";
   position: absolute;
-  top: 6px;
+  top: 5px;
   left: 10px;
   width: 24px;
   height: 24px;
