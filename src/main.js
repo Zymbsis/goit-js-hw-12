@@ -31,17 +31,16 @@ form.addEventListener('submit', async e => {
   e.preventDefault();
   loaderButton.classList.remove('is-visible');
   loaderButton.removeEventListener('click', onButtonClick);
-  if (checkbox.checked) {
-    textLoader.classList.add('text-loader-light-theme', 'is-visible');
-  } else {
-    textLoader.classList.add('is-visible');
-  }
   galleryContainer.innerHTML = '';
 
   if (!input.value.trim()) {
     renderFn.createPopUp('Search field can not be empty', textLoader, input);
   } else {
-    textLoader.classList.add('is-visible');
+    if (checkbox.checked) {
+      textLoader.classList.add('text-loader-light-theme', 'is-visible');
+    } else {
+      textLoader.classList.add('is-visible');
+    }
     searchImgParams.page = 1;
     searchImgParams.q = input.value;
     try {
