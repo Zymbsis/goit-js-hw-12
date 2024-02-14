@@ -1,19 +1,31 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import * as pixabayApi from './js/pixabay-api';
+import requestFn from './js/pixabay-api';
 import * as renderFn from './js/render-functions';
 
 const form = document.querySelector('.form');
 const input = form.elements.text;
-
 const galleryContainer = document.querySelector('.gallery-container');
-const loaderText = document.querySelector('.loader');
+const textLoader = document.querySelector('.text-loader');
 const loaderButton = document.querySelector('.loader-button');
 const buttonUp = document.querySelector('.button-up');
+const checkbox = document.querySelector('.checkbox');
 
+const elemForChangeTheme = document.querySelectorAll('.dark-theme');
+const localStorageKey = 'light-theme';
+const URL = 'https://pixabay.com/api/';
+const searchImgParams = {
+  key: '42207525-2f984868f7881b9b68563ca8c',
+  image_type: 'photo',
+  orientation: 'horizontal',
+  safesearch: true,
+  q: '',
+  page: 1,
+  per_page: 15,
+};
 let totalPageQuantity;
 let imgCollection;
-let stateCheckbox;
+
 const viewGallery = new SimpleLightbox('.gallery-link');
 
 form.addEventListener('submit', async e => {
@@ -23,43 +35,44 @@ form.addEventListener('submit', async e => {
   galleryContainer.innerHTML = '';
 
   if (!input.value.trim()) {
-    renderFn.createPopUp('Search field can not be empty', loaderText, input);
+    renderFn.createPopUp('Search field can not be empty', textLoader, input);
   } else {
-    loaderText.classList.add('is-visible');
-    pixabayApi.searchImgParams.page = 1;
-    pixabayApi.searchImgParams.q = input.value;
+    textLoader.classList.add('is-visible');
+    searchImgParams.page = 1;
+    searchImgParams.q = input.value;
     try {
-      imgCollection = (await pixabayApi.pixabayRequest()).hits;
-      const totalImgQuantity = (await pixabayApi.pixabayRequest()).totalHits;
+      imgCollection = (await requestFn(URL, searchImgParams)).hits;
+      const totalImgQuantity = (await requestFn(URL, searchImgParams))
+        .totalHits;
 
       if (!imgCollection.length) {
         renderFn.createPopUp(
           'Sorry, there are no images matching your search query. Please, try again!',
-          loaderText,
+          textLoader,
           input
         );
       } else {
         totalPageQuantity = Math.ceil(
-          totalImgQuantity / pixabayApi.searchImgParams.per_page
+          totalImgQuantity / searchImgParams.per_page
         );
         renderFn.createMarkup(
           imgCollection,
-          loaderText,
+          textLoader,
           viewGallery,
           galleryContainer,
-          JSON.parse(localStorage.getItem(localStorageKey))
+          checkbox.checked
         );
 
         if (totalPageQuantity > 1) {
           loaderButton.classList.add('is-visible');
           loaderButton.addEventListener('click', onButtonClick);
-          pixabayApi.searchImgParams.page += 1;
+          searchImgParams.page += 1;
         }
       }
     } catch (error) {
       renderFn.createPopUp(
         'Oops! Something went wrong. Try again!',
-        loaderText,
+        textLoader,
         input
       );
       console.log(error);
@@ -70,33 +83,32 @@ form.addEventListener('submit', async e => {
 
 async function onButtonClick(e) {
   loaderButton.classList.remove('is-visible');
-  loaderText.classList.add('is-visible');
+  textLoader.classList.add('is-visible');
   try {
-    imgCollection = (await pixabayApi.pixabayRequest()).hits;
+    imgCollection = (await requestFn(URL, searchImgParams)).hits;
     renderFn.createMarkup(
       imgCollection,
-      loaderText,
+      textLoader,
       viewGallery,
       galleryContainer,
-      JSON.parse(localStorage.getItem(localStorageKey))
+      checkbox.checked
     );
-    pixabayApi.searchImgParams.page += 1;
-    if (pixabayApi.searchImgParams.page < totalPageQuantity) {
+    searchImgParams.page += 1;
+    if (searchImgParams.page < totalPageQuantity) {
       loaderButton.classList.add('is-visible');
     } else {
       loaderButton.removeEventListener('click', onButtonClick);
       renderFn.createPopUp(
         "We're sorry, but you've reached the end of search results.",
-        loaderText,
+        textLoader,
         input
       );
     }
-
     scrollWindowOnBtnClick();
   } catch (error) {
     renderFn.createPopUp(
       'Oops! Something went wrong. Try again!',
-      loaderText,
+      textLoader,
       input
     );
     console.log(error);
@@ -127,43 +139,32 @@ function scrollOnClick() {
   form.scrollIntoView({ behavior: 'smooth' });
 }
 
-//TODO =======================================================================================================================
-//TODO =======================================================================================================================
-const localStorageKey = 'light-theme';
-const checkbox = document.querySelector('.checkbox');
+checkbox.addEventListener('change', changeTheme);
 
-checkbox.addEventListener('change', () => {
+window.addEventListener('load', themeAtLoading);
+
+function changeTheme() {
   localStorage.setItem(localStorageKey, JSON.stringify(checkbox.checked));
-  const elemForChangeTheme = document.querySelectorAll('.dark-theme');
+  const galleryElem = document.querySelectorAll('.gallery-item');
+  const imgLoader = document.querySelectorAll('.img-loader');
   if (checkbox.checked) {
-    document.body.classList.add('body-light');
+    document.body.classList.add('body-light-theme');
     elemForChangeTheme.forEach(item => item.classList.add('light-theme'));
-    document
-      .querySelectorAll('.gallery-item')
-      .forEach(item => item.classList.add('light-theme'));
+    galleryElem.forEach(item => item.classList.add('light-theme'));
+    imgLoader.forEach(item => item.classList.add('img-loader-light-theme'));
+    textLoader.classList.add('text-loader-light-theme');
   } else {
-    document.body.classList.remove('body-light');
+    document.body.classList.remove('body-light-theme');
     elemForChangeTheme.forEach(item => item.classList.remove('light-theme'));
-    document
-      .querySelectorAll('.gallery-item')
-      .forEach(item => item.classList.remove('light-theme'));
+    galleryElem.forEach(item => item.classList.remove('light-theme'));
+    imgLoader.forEach(item => item.classList.remove('img-loader-light-theme'));
+    textLoader.classList.remove('text-loader-light-theme');
   }
-});
-
-window.addEventListener('load', () => {
+}
+function themeAtLoading() {
   checkbox.checked = JSON.parse(localStorage.getItem(localStorageKey));
-  const elemForChangeTheme = document.querySelectorAll('.dark-theme');
   if (checkbox.checked) {
-    document.body.classList.add('body-light');
+    document.body.classList.add('body-light-theme');
     elemForChangeTheme.forEach(item => item.classList.add('light-theme'));
-    document
-      .querySelectorAll('.gallery-item')
-      .forEach(item => item.classList.add('light-theme'));
-  } else {
-    document.body.classList.remove('body-light');
-    elemForChangeTheme.forEach(item => item.classList.remove('light-theme'));
-    document
-      .querySelectorAll('.gallery-item')
-      .forEach(item => item.classList.remove('light-theme'));
   }
-});
+}
