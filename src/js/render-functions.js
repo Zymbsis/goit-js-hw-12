@@ -10,11 +10,6 @@ export function createMarkup(
   markupContainer,
   stateCheckbox
 ) {
-  if (stateCheckbox) {
-    loaderElem.classList.add('text-loader-light-theme', 'is-visible');
-  } else {
-    loaderElem.classList.add('is-visible');
-  }
   markupContainer.innerHTML += arr
     .map(
       item =>

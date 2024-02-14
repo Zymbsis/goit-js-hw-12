@@ -10,7 +10,6 @@ const textLoader = document.querySelector('.text-loader');
 const loaderButton = document.querySelector('.loader-button');
 const buttonUp = document.querySelector('.button-up');
 const checkbox = document.querySelector('.checkbox');
-
 const elemForChangeTheme = document.querySelectorAll('.dark-theme');
 const localStorageKey = 'light-theme';
 const URL = 'https://pixabay.com/api/';
@@ -31,7 +30,11 @@ const viewGallery = new SimpleLightbox('.gallery-link');
 form.addEventListener('submit', async e => {
   e.preventDefault();
   loaderButton.removeEventListener('click', onButtonClick);
-  loaderButton.classList.remove('is-visible');
+  if (checkbox.checked) {
+    textLoader.classList.add('text-loader-light-theme', 'is-visible');
+  } else {
+    textLoader.classList.add('is-visible');
+  }
   galleryContainer.innerHTML = '';
 
   if (!input.value.trim()) {
@@ -83,7 +86,11 @@ form.addEventListener('submit', async e => {
 
 async function onButtonClick(e) {
   loaderButton.classList.remove('is-visible');
-  textLoader.classList.add('is-visible');
+  if (checkbox.checked) {
+    textLoader.classList.add('text-loader-light-theme', 'is-visible');
+  } else {
+    textLoader.classList.add('is-visible');
+  }
   try {
     imgCollection = (await requestFn(URL, searchImgParams)).hits;
     renderFn.createMarkup(
